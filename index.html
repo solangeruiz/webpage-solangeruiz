@@ -58,6 +58,19 @@
   @keyframes zoneMove { 0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.7; } 33% { transform: translate(140px, -90px) scale(1.15); opacity: 1; } 66% { transform: translate(-110px, 80px) scale(0.9); opacity: 0.8; } }
   @media (prefers-reduced-motion: reduce) { .zone-aura { animation: none; } }
 
+  .sun-menu { position: relative; }
+  .sun-menu > summary { list-style: none; cursor: pointer; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 999px; transition: transform 0.4s, background 0.2s; }
+  .sun-menu > summary::-webkit-details-marker { display: none; }
+  .sun-menu > summary:hover { background: rgba(255,255,255,0.08); }
+  .sun-menu[open] > summary { transform: rotate(60deg); background: rgba(210,56,108,0.25); }
+  .sun-panel { position: absolute; top: 54px; left: 0; min-width: 230px; padding: 10px; border-radius: 16px; background: rgba(20,22,31,0.97); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 20px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 2px; z-index: 50; }
+  .sun-item { display: block; padding: 11px 14px; border-radius: 10px; font-size: 15px; font-weight: 700; color: #F4F4F7; }
+  .sun-item:hover { background: rgba(210,56,108,0.2); }
+  .sun-sub { padding-left: 28px; font-size: 14px; font-weight: 600; color: #C7C9D6; }
+  .sun-label { padding: 12px 14px 4px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #D2386C; }
+  .go-up { position: fixed; right: 18px; bottom: 140px; z-index: 40; width: 46px; height: 46px; border-radius: 999px; background: rgba(210,56,108,0.9); color: #FFFFFF; border: none; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(0,0,0,0.4); cursor: pointer; opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity 0.3s, transform 0.3s; }
+  .go-up.is-shown { opacity: 1; pointer-events: auto; transform: none; }
+  @media (max-width: 760px) { .go-up { bottom: 90px; right: 16px; } }
   /* ===== Mobile (iPhone) ===== */
   @media (max-width: 760px) {
     header { padding: 14px 18px !important; }
@@ -77,7 +90,8 @@
     [style*="height: 400px; object-fit"], [style*="height: 340px; object-fit"] { height: 240px !important; }
     [style*="min-height: 520px"] { display: none !important; }
     .float-b[style*="width: 400px"] { width: 260px !important; height: 260px !important; }
-    #inicio > div:first-of-type[style*="width: 40%"] { width: 100% !important; right: 0 !important; opacity: 0.35; }
+    #inicio > div:first-of-type[style*="width: 40%"] { width: 62% !important; right: -6% !important; top: 40px !important; bottom: auto !important; height: 330px !important; opacity: 0.5; }
+    .sun-panel { min-width: 250px; }
     #inicio [style*="font-size: 76px"] { font-size: 44px !important; }
     .quick-nav { display: none !important; }
     [style*="repeat(4, minmax(0, 1fr)); gap: 20px; position: relative"] { grid-template-columns: minmax(0, 1fr) !important; }
@@ -112,7 +126,17 @@
 
   <!-- NAV -->
   <header style="width: 100%; box-sizing: border-box; position: sticky; top: 0; z-index: 20; background: rgba(11,12,18,0.82); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: space-between; padding: 18px 64px;">
-    <a href="#inicio" style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 19px; letter-spacing: 0.04em; text-transform: uppercase;">Solange Ruiz</a>
+    <details class="sun-menu">
+      <summary aria-label="Open menu"><img src="assets/photos-sun-logo.png" alt="Solange Ruiz logo" style="width: 40px; height: 40px; display: block;" /></summary>
+      <div class="sun-panel">
+        <a class="sun-item" href="about.html">About me</a>
+        <a class="sun-item" href="#contact">Contact</a>
+        <span class="sun-label">View my work</span>
+        <a class="sun-item sun-sub" href="#multimedia">Multimedia &amp; Social</a>
+        <a class="sun-item sun-sub" href="#video">Video Editor</a>
+        <a class="sun-item sun-sub" href="#events">Event Production</a>
+      </div>
+    </details>
     <nav style="display: flex; align-items: center; gap: 28px;">
       <a class="nav-link" href="#multimedia" style="font-size: 14px; font-weight: 600; color: #C7C9D6;">Multimedia &amp; Social</a>
       <a class="nav-link" href="#video" style="font-size: 14px; font-weight: 600; color: #C7C9D6;">Video Editor</a>
@@ -600,9 +624,18 @@
     </div>
   </footer>
 
+  <button class="go-up" type="button" aria-label="Go back to top"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg></button>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.sun-menu .sun-item').forEach((l) => l.addEventListener('click', () => { const d = l.closest('details'); if (d) d.open = false; }));
+    document.addEventListener('click', (e) => { const d = document.querySelector('.sun-menu'); if (d && d.open && !d.contains(e.target)) d.open = false; });
+    const goUp = document.querySelector('.go-up');
+    if (goUp) {
+      const onS = () => goUp.classList.toggle('is-shown', window.scrollY > 600);
+      window.addEventListener('scroll', onS, { passive: true }); onS();
+      goUp.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
     const toTop = () => { try { const h = (window.location.hash || '').slice(1); const el = h ? document.getElementById(h) : null; if (el) { el.scrollIntoView(); return; } window.scrollTo(0, 0); document.documentElement.scrollTop = 0; document.body.scrollTop = 0; } catch (e) {} };
     toTop(); requestAnimationFrame(toTop); setTimeout(toTop, 60); setTimeout(toTop, 400);
     let lastW = window.innerWidth;
