@@ -73,6 +73,17 @@
     figure img, video { max-width: 100% !important; }
     [style*="position: absolute; right: 0; bottom: 0; width: 170px"] { width: 120px !important; height: 120px !important; }
   }
+  .tint-purple > div:last-of-type, .tint-pink > div:last-of-type, .tint-blue > div:last-of-type { z-index: 2; }
+  .tile-tint { z-index: 1; position: absolute; inset: 0; opacity: 0; transition: opacity 0.3s; pointer-events: none; mix-blend-mode: normal; }
+  .tint-purple .tile-tint { background: linear-gradient(180deg, rgba(140,82,255,0.35), rgba(110,60,230,0.85)); }
+  .tint-pink .tile-tint { background: linear-gradient(180deg, rgba(210,56,108,0.35), rgba(190,40,100,0.85)); }
+  .tint-blue .tile-tint { background: linear-gradient(180deg, rgba(60,130,255,0.35), rgba(40,100,230,0.85)); }
+  .tint-purple:hover, .tint-pink:hover, .tint-blue:hover { transform: translateY(-4px); }
+  .tint-purple:hover .tile-tint, .tint-pink:hover .tile-tint, .tint-blue:hover .tile-tint { opacity: 1; }
+  .tint-purple:hover { border-color: rgba(160,110,255,0.9) !important; box-shadow: 0 16px 40px rgba(140,82,255,0.35) !important; }
+  .tint-pink:hover { border-color: rgba(230,90,140,0.9) !important; box-shadow: 0 16px 40px rgba(210,56,108,0.35) !important; }
+  .tint-blue:hover { border-color: rgba(100,160,255,0.9) !important; box-shadow: 0 16px 40px rgba(60,130,255,0.35) !important; }
+  .ql-dot { width: 10px; height: 10px; border-radius: 999px; flex-shrink: 0; margin: 6px; }
 </style>
 </head>
 <body>
@@ -153,36 +164,36 @@
       <p style="margin: 0; font-size: 15px; color: #6B6F80;">Explore projects by area.</p>
     </div>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
-      <a class="glow-card" href="index.html#multimedia" style="position: relative; display: block; height: 220px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #14161F;">
+      <a class="glow-card tint-purple" href="index.html#multimedia" style="position: relative; display: block; height: 220px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #14161F;">
+        <div class="tile-tint"></div>
         <img src="assets/photos-phoenix-iconic.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; opacity: 0.55; display: block;">
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,12,18,0.1) 0%, rgba(11,12,18,0.92) 100%);"></div>
         <div style="position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
           <div style="display: flex; flex-direction: column; gap: 4px;">
-            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #D2386C;">01</span>
             <span style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 20px; line-height: 1.15; text-transform: uppercase; color: #FFFFFF;">Multimedia &amp; Social Media</span>
             <span style="font-size: 13px; color: #C7C9D6;">Ginsburg Family Foundation, Championship, Nopa</span>
           </div>
           <span style="width: 40px; height: 40px; border-radius: 999px; background: #D2386C; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
         </div>
       </a>
-      <a class="glow-card" href="index.html#video" style="position: relative; display: block; height: 220px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #14161F;">
+      <a class="glow-card tint-pink" href="index.html#video" style="position: relative; display: block; height: 220px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #14161F;">
+        <div class="tile-tint"></div>
         <img src="assets/vids-garden-unknown-poster.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 0.55; display: block;">
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,12,18,0.1) 0%, rgba(11,12,18,0.92) 100%);"></div>
         <div style="position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
           <div style="display: flex; flex-direction: column; gap: 4px;">
-            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #D2386C;">02</span>
             <span style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 20px; line-height: 1.15; text-transform: uppercase; color: #FFFFFF;">Video Editor &amp; VFX</span>
             <span style="font-size: 13px; color: #C7C9D6;">Compositing, 3D, and video editing</span>
           </div>
           <span style="width: 40px; height: 40px; border-radius: 999px; background: #D2386C; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2"><path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path></svg></span>
         </div>
       </a>
-      <a class="glow-card" href="index.html#events" style="position: relative; display: block; height: 220px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #14161F;">
+      <a class="glow-card tint-blue" href="index.html#events" style="position: relative; display: block; height: 220px; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); background: #14161F;">
+        <div class="tile-tint"></div>
         <img src="assets/gmc-group.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 55%; opacity: 0.55; display: block;">
         <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,12,18,0.1) 0%, rgba(11,12,18,0.92) 100%);"></div>
         <div style="position: absolute; left: 22px; right: 22px; bottom: 20px; display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;">
           <div style="display: flex; flex-direction: column; gap: 4px;">
-            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: #D2386C;">03</span>
             <span style="font-family: 'Fraunces', serif; font-weight: 800; font-size: 20px; line-height: 1.15; text-transform: uppercase; color: #FFFFFF;">Event Production</span>
             <span style="font-size: 13px; color: #C7C9D6;">ISS President, Eco Fashion Week, Global Music</span>
           </div>
